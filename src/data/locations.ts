@@ -1,9 +1,9 @@
-type Location = {
+export type Location = {
   name: string;
   subroom?: { [key: string]: Location };
 };
 
-export const LOCATIONS: { [key: string]: Location } = {
+export const LOCATIONS = {
   Mainstage: {
     name: "Mainstage",
     subroom: {
@@ -42,3 +42,10 @@ export const LOCATIONS: { [key: string]: Location } = {
     name: "Pool",
   },
 };
+
+export const ALL_LOCATIONS: (Location & { id: string })[] = Object.entries(
+  LOCATIONS
+).map(([key, location]) => ({
+  ...location,
+  id: key,
+}));
