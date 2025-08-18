@@ -38,7 +38,7 @@ export const LOCATIONS = {
     },
   },
   SharkHouse: {
-    id: "Sharkhouse",
+    id: "SharkHouse",
     name: "Sharkhouse",
   },
   MainstageField: {

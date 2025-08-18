@@ -1,49 +1,10 @@
-import { LOCATIONS } from "./locations.ts";
-import type { Location } from "./locations.ts";
+import { friday, saturday, type Event } from "./timestamps";
+import { LOCATIONS } from "../locations";
 
-type Days = "FRIDAY" | "SATURDAY" | "SUNDAY";
-
-export const DAYS: Days[] = ["FRIDAY", "SATURDAY", "SUNDAY"];
-
-type Timestamp = {
-  day: Days;
-  hours: number;
-  minutes: number;
-};
-
-type Timespan = {
-  from: Timestamp;
-  to: Timestamp;
-};
-
-type Event = {
-  name: string;
-  subtext?: string;
-  link?: string;
-  location: Location;
-  periods: Timespan[];
-};
-
-const friday = (hours: number, minutes: number): Timestamp => ({
-  day: "FRIDAY",
-  hours,
-  minutes,
-});
-const saturday = (hours: number, minutes: number): Timestamp => ({
-  day: "SATURDAY",
-  hours,
-  minutes,
-});
-const sunday = (hours: number, minutes: number): Timestamp => ({
-  day: "SUNDAY",
-  hours,
-  minutes,
-});
-
-const FRIDAY_EVENTS: Event[] = [
+export const FRIDAY_EVENTS: Event[] = [
   {
     name: "D&D Oneshot",
-    subtext: "(2 sessions)",
+    subtext: "2 sessions",
     location: LOCATIONS.Mainstage,
     periods: [
       {
@@ -104,7 +65,7 @@ const FRIDAY_EVENTS: Event[] = [
   },
   {
     name: "Bounty Hunter",
-    subtext: "(Handout items)",
+    subtext: "Handout items",
     location: LOCATIONS.DuckyDomeStage,
     periods: [
       {
@@ -153,6 +114,16 @@ const FRIDAY_EVENTS: Event[] = [
       },
     ],
   },
+  // all day events
+  {
+    name: "Matsuri / Ducky Yard Sale",
+    subtext: "Pickup/Drop off only",
+    location: LOCATIONS.SharkHouse,
+    periods: [
+      {
+        from: friday(16),
+        to: friday(19),
+      },
+    ],
+  },
 ];
-
-export const EVENTS = [...FRIDAY_EVENTS];
