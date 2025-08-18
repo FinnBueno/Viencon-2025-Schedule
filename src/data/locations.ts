@@ -23,9 +23,19 @@ export const LOCATIONS = {
     id: "DuckyDomeStage",
     name: "Ducky Dome Stage",
   },
-  Gameroom: {
-    id: "Gameroom",
-    name: "Gameroom/Karaoke",
+  GameroomKaraoke: {
+    id: "GameroomKaraoke",
+    name: "",
+    subroom: {
+      gameroom: {
+        id: "gameroom",
+        name: "Gameroom",
+      },
+      karaoke: {
+        id: "karaoke",
+        name: "Karaoke",
+      },
+    },
   },
   SharkHouse: {
     id: "Sharkhouse",

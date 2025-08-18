@@ -125,7 +125,7 @@ const FRIDAY_EVENTS: Event[] = [
   },
   {
     name: "Nerdcore",
-    location: LOCATIONS.Gameroom,
+    location: LOCATIONS.GameroomKaraoke.subroom.gameroom,
     periods: [
       {
         from: friday(16, 0),
@@ -135,7 +135,7 @@ const FRIDAY_EVENTS: Event[] = [
   },
   {
     name: "Asgard Sings",
-    location: LOCATIONS.Gameroom,
+    location: LOCATIONS.GameroomKaraoke.subroom.karaoke,
     periods: [
       {
         from: friday(16, 0),
@@ -145,7 +145,7 @@ const FRIDAY_EVENTS: Event[] = [
   },
   {
     name: "Pong Competition",
-    location: LOCATIONS.Gameroom,
+    location: LOCATIONS.GameroomKaraoke,
     periods: [
       {
         from: friday(20, 30),

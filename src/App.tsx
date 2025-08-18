@@ -5,13 +5,18 @@ import { DAYS, EVENTS } from './data/events'
 import type { FC } from 'react'
 
 const globalStyle = css`
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
 `
 
 const amountOfSegments = (8 + 24 + 18) * 4 + 1
-const segmentSpace = '100px';
+const segmentSpace = '80px';
 const startHours = 16;
 
 const getColumnTemplate = () => {
@@ -19,8 +24,8 @@ const getColumnTemplate = () => {
   for (let i = 0; i < amountOfSegments; i++) {
     const [day, hours, quarters] = toTimestamp(i);
     const stamp = `${day}-${hours}-${quarters}`;
-    // const space = ((hours === 4 && quarters === 0) || hours < 4 || hours >= 11) ? segmentSpace : '0px'
-    columnTemplate += `${stamp}-start] ${segmentSpace} [${stamp}-end`;
+    const space = ((hours === 4 && quarters === 0) || hours < 4 || hours >= 11) ? segmentSpace : '0px'
+    columnTemplate += `${stamp}-start] ${space} [${stamp}-end`;
     if (i != amountOfSegments - 1) {
       columnTemplate += ' ';
     }
@@ -65,28 +70,55 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: ${getColumnTemplate()};
   grid-template-rows: ${getRowTemplate()};
-  row-gap: 8px;
 `
 
 const TimestampDisplay = styled.div<{ stamp: string }>`
   grid-column: ${({ stamp }) => `${stamp}-start / ${stamp}-end`};
   grid-row: start-timestamp / end-timestamp;
-  background-color: red;
   font-size: 1.5rem;
   position: relative;
   overflow: visible !important;
   & > p {
     position: absolute;
-    left: calc(-50% + 21px);
+    left: calc(-50% + 10px);
     margin: 0;
     bottom: 0;
   }
 `
 
-const FridayHeader = styled.h2`
-  grid-column: FRIDAY-16-0-start / FRIDAY-23-0-end;
+const DayHeader = styled.h2`
   grid-row: start-timestamp / end-timestamp;
   z-index: 2;
+  margin: 0 0 36px 0;
+`;
+
+const FridayHeader = styled(DayHeader)`
+  grid-column: FRIDAY-16-0-start / FRIDAY-23-0-end;
+`;
+
+const SaturdayHeader = styled(DayHeader)`
+  grid-column: SATURDAY-11-0-start / SATURDAY-12-0-end;
+`;
+
+const SundayHeader = styled(DayHeader)`
+  grid-column: SUNDAY-11-0-start / SUNDAY-12-0-end;
+`;
+
+const GridBorder = styled.div<{ stamp: string, rowId: string }>`
+  border-color: black;
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  grid-column: ${props => `${props.stamp}-start / ${props.stamp}-end`};
+  grid-row: ${props => `${props.rowId}-start / ${props.rowId}-end`};
+`;
+
+const EventBlock = styled.div<{ from: string, to: string, rowId: string }>`
+  background-color: rgba(255, 180, 70);
+  grid-column: ${props => `${props.from}-start / ${props.to}-start`};
+  grid-row: ${props => `${props.rowId}-start / ${props.rowId}-end`};
+  outline: 1px solid;
+  margin-left: 1px;
+  margin-top: 1px;
 `;
 
 function App() {
@@ -95,6 +127,8 @@ function App() {
       <Global styles={globalStyle} />
       <Grid>
         <FridayHeader>Friday</FridayHeader>
+        <SaturdayHeader>Saturday</SaturdayHeader>
+        <SundayHeader>Sunday</SundayHeader>
         {Array.from(Array(amountOfSegments).keys()).map(i => {
           const [day, hour, minutes] = toTimestamp(i)
           return (
@@ -108,23 +142,41 @@ function App() {
         {ALL_LOCATIONS.map((loc) => (
           <>
             {loc.subroom ? Object.entries(loc.subroom).map(([id, subroom]) => (
-              <TableRow roomId={id} title={`${loc.name} (${subroom.name})`} />
+              <>
+                {Array.from(Array(amountOfSegments).keys()).map(i => {
+                  const [day, hour, minutes] = toTimestamp(i)
+                  return (
+                    <GridBorder stamp={`${day}-${hour}-${minutes}`} rowId={id} />
+                  )
+                })}
+                <TableRow
+                  roomId={id}
+                  title={loc.name ? `${loc.name} (${subroom.name})` : subroom.name} />
+              </>
             )) : (
-              <TableRow roomId={loc.id} title={loc.name} />
+              <>
+                {Array.from(Array(amountOfSegments).keys()).map(i => {
+                  const [day, hour, minutes] = toTimestamp(i)
+                  return (
+                    <GridBorder stamp={`${day}-${hour}-${minutes}`} rowId={loc.id} />
+                  )
+                })}
+                <TableRow roomId={loc.id} title={loc.name} />
+              </>
             )}
           </>
         ))}
+        {}
         {EVENTS.map(event => {
           return event.periods.map(({ from, to }) => {
             return (
-              <div style={{
-                backgroundColor: 'rgba(255, 180, 70, 0.5)',
-                border: '1px black solid',
-                gridRow: `${event.location.id}-start / ${event.location.id}-end`,
-                gridColumn: `${from.day}-${from.hours}-${from.minutes}-start / ${to.day}-${to.hours}-${to.minutes}-start`
-              }}>
+              <EventBlock
+                from={`${from.day}-${from.hours}-${from.minutes}`}
+                to={`${to.day}-${to.hours}-${to.minutes}`}
+                rowId={event.location.id}
+              >
                 {event.name}
-              </div>
+              </EventBlock>
             )
           })
         })}
