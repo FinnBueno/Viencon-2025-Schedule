@@ -109,7 +109,7 @@ const FRIDAY_EVENTS: Event[] = [
     periods: [
       {
         from: friday(18, 0),
-        to: friday(18, 55),
+        to: friday(18, 45),
       },
     ],
   },
