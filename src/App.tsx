@@ -1,9 +1,10 @@
 import { css, Global, ThemeProvider } from "@emotion/react";
 import { Events } from "./components/events";
-import { theme } from "./styles/theme";
 import type { Theme } from "@emotion/react";
 import { TableHeaders } from "./components/header";
 import { ScheduleGrid } from "./components/grid";
+import { darkTheme, lightTheme } from "./styles/theme";
+import { useVienconTheme, VienconThemeProvider } from "./hooks/use-viencon-theme";
 
 const getGlobalStyle = (theme: Theme) => css`
   html,
@@ -23,7 +24,16 @@ const getGlobalStyle = (theme: Theme) => css`
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <VienconThemeProvider>
+      <AppWithTheme />
+    </VienconThemeProvider>
+  );
+}
+
+function AppWithTheme() {
+  const { theme } = useVienconTheme();
+  return (
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <Global styles={(theme) => getGlobalStyle(theme)} />
       <ScheduleGrid>
         <TableHeaders />

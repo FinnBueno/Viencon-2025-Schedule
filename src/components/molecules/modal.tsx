@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import type { FC, ReactNode } from "react";
 import { Button } from "../atoms/button";
 import { IoCloseCircle } from "react-icons/io5";
-import { theme } from "../../styles/theme";
+import { darkTheme } from "../../styles/theme";
 
 const Backdrop = styled.div<{ show: boolean }>`
   position: absolute;
@@ -46,7 +46,7 @@ export const Modal: FC<{ hideModal: () => void, children: ReactNode, show: boole
   <Backdrop onClick={hideModal} show={show}>
     <ModalContainer>
       <CloseButton>
-        <IoCloseCircle color={theme.color.font.onBackground} size={28} />
+        <IoCloseCircle color={darkTheme.color.font.onBackground} size={28} />
       </CloseButton>
       <ModalBody>
         {children}

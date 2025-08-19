@@ -15,9 +15,9 @@ const LargeLocationRow = styled.div<{ roomId: string, hide: boolean }>`
 
   background-color: rgb(234, 174, 93);
   border-radius: 0 12px 12px 0;
-  box-shadow: 10px 1px 19px 0px rgba(0,0,0,0.39);
-  -webkit-box-shadow: 10px 1px 19px 0px rgba(0,0,0,0.39);
-  -moz-box-shadow: 10px 1px 19px 0px rgba(0,0,0,0.39);
+  box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.15);
+  -moz-box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.15);
 
   color: ${(props) => props.theme.color.font.onForeground};
   text-align: right;

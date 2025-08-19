@@ -1,26 +1,31 @@
 import styled from "@emotion/styled"
 import { Button } from "./atoms/button"
-import { theme } from "../styles/theme"
-import { FaInfoCircle, FaSun } from "react-icons/fa"
+import { darkTheme } from "../styles/theme"
+import { FaInfoCircle, FaMoon, FaSun } from "react-icons/fa"
 import { useState } from "react"
 import { Modal } from "./molecules/modal"
+import { useVienconTheme } from "../hooks/use-viencon-theme"
 
 const ButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 8px;
-`
+`;
 
 export const Settings = () => {
   const [showModal, setShowModal] = useState(false);
+  const { toggle, theme } = useVienconTheme();
+
+  const ThemeIcon = theme === 'dark' ? FaSun : FaMoon;
+
   return (
     <>
       <ButtonGroup>
         <Button>
-          <FaSun color={theme.color.font.onBackground} size={24} />
+          <ThemeIcon onClick={toggle} color={darkTheme.color.font.onBackground} size={24} />
         </Button>
         <Button>
-          <FaInfoCircle color={theme.color.font.onBackground} size={24} onClick={() => setShowModal(true)} />
+          <FaInfoCircle color={darkTheme.color.font.onBackground} size={24} onClick={() => setShowModal(true)} />
         </Button>
       </ButtonGroup>
       <Modal hideModal={() => setShowModal(false)} show={showModal}>
