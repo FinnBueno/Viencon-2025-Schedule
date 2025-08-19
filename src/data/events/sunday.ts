@@ -116,7 +116,7 @@ export const SUNDAY_EVENTS: Event[] = [
   },
   // all day events
   {
-    name: "Artist Alley / Matsuri / Ducky Yard Sale",
+    name: "Artist Alley / Matsuri & Ducky Yard Sale",
     subtext: "16:00",
     location: LOCATIONS.SharkHouse,
     periods: [
