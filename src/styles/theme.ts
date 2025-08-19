@@ -2,7 +2,8 @@ import type { Theme } from "@emotion/react";
 
 export const darkTheme: Theme = {
   color: {
-    eventBlock: "#FEBE48",
+    eventBlock: "rgb(115, 186, 168)",
+    location: "rgb(234, 174, 93)",
     background: "#314149",
     font: {
       onBackground: "#ffffff",
@@ -13,7 +14,8 @@ export const darkTheme: Theme = {
 
 export const lightTheme: Theme = {
   color: {
-    eventBlock: "#FEBE48",
+    eventBlock: "rgb(115, 186, 168)",
+    location: "rgb(234, 174, 93)",
     background: "#EFEFEF",
     font: {
       onBackground: "#000",

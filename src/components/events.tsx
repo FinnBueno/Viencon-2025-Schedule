@@ -6,7 +6,8 @@ const EventBlock = styled.div<{ from: string; to: string; rowId: string }>`
   grid-column: ${(props) => `${props.from}-start / ${props.to}-start`};
   grid-row: ${(props) => `${props.rowId}-start / ${props.rowId}-end`};
   
-  outline: 1px solid;
+  outline: 1px solid black;
+  margin-left: 1px;
   background-color: ${(props) => props.theme.color.eventBlock};
   border-radius: 8px;
 
