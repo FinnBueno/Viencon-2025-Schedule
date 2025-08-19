@@ -1,6 +1,7 @@
 export type Location = {
   name: string;
   id: string;
+  emoji: string;
   subroom?: { [key: string]: Location };
 };
 
@@ -8,31 +9,38 @@ export const LOCATIONS = {
   Mainstage: {
     id: "Mainstage",
     name: "Mainstage",
+    emoji: "🎤",
     subroom: {
       roomOne: {
         id: "roomOne",
-        name: "\n(Room 1)",
+        emoji: "1️⃣",
+        name: "(Room 1)",
       },
       roomTwo: {
         id: "roomTwo",
-        name: "\n(Room 2)",
+        emoji: "2️⃣",
+        name: "(Room 2)",
       },
     },
   },
   DuckyDomeStage: {
     id: "DuckyDomeStage",
-    name: "Ducky Dome\nStage",
+    emoji: "🦆 🎤",
+    name: "Ducky Dome Stage",
   },
   GameroomKaraoke: {
     id: "GameroomKaraoke",
     name: "",
+    emoji: "",
     subroom: {
       gameroom: {
         id: "gameroom",
+        emoji: "🕹️ 🎮",
         name: "Gameroom",
       },
       karaoke: {
         id: "karaoke",
+        emoji: "🎙️ 🎶",
         name: "Karaoke",
       },
     },
@@ -40,28 +48,34 @@ export const LOCATIONS = {
   SharkHouse: {
     id: "SharkHouse",
     name: "Sharkhouse",
+    emoji: "🦈 🏠",
   },
   MainstageField: {
     id: "MainstageField",
-    name: "Field next to\nMainstage",
+    name: "Field next to Mainstage",
+    emoji: "🎤 🌳",
   },
   HawkArena: {
     id: "HawkArena",
     name: "Hawk Arena",
+    emoji: "🦅",
     subroom: {
       gym: {
         id: "gym",
-        name: "\n(Gym Hall)",
+        name: "(Gym Hall)",
+        emoji: "🏋🏻‍♀️",
       },
       squash: {
         id: "squash",
-        name: "\n(Squash Hall)",
+        name: "(Squash Hall)",
+        emoji: "🎾",
       },
     },
   },
   Pool: {
     id: "Pool",
     name: "Pool",
+    emoji: "🏊🏻‍♀️ 🌊",
   },
 };
 

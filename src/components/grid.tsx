@@ -6,6 +6,8 @@ import {
   isVisibleTimestamp,
 } from "../scheduling/time-util";
 import { getAllLocationOptions } from "../scheduling/location-util";
+import { useHorizontalSrollPosition } from "../hooks/use-horizontal-scroll";
+import { LocationRow } from "./location";
 
 const segmentSpace = "80px";
 
@@ -23,7 +25,7 @@ const segmentSpace = "80px";
  * @returns The CSS value for 'grid-template-columns' for the schedule grid
  */
 const getColumnTemplate = () => {
-  let columnTemplate = "[start-header] 140px [end-header ";
+  let columnTemplate = "[start-header] 164px [end-header ";
   const allSegments = getAllTimestampSegments();
   for (const { day, hours, quarters, index } of allSegments) {
     const stamp = `${day}-${hours}-${quarters}`;
@@ -79,6 +81,7 @@ const Grid = styled.div`
   grid-template-columns: ${getColumnTemplate()};
   grid-template-rows: ${getRowTemplate()};
   row-gap: 8px;
+  margin-top: 4px;
 `;
 
 const GridBorder = styled.div<{ stamp: string; rowId: string }>`
@@ -90,32 +93,20 @@ const GridBorder = styled.div<{ stamp: string; rowId: string }>`
   grid-row: ${(props) => `${props.rowId}-start / ${props.rowId}-end`};
 `;
 
-const LocationRow = styled.div<{ roomId: string }>`
-  background-color: rgb(234, 174, 93);
-  border-radius: 0 12px 12px 0;
-  text-align: right;
-  padding: 12px 20px 12px 12px;
-  margin-right: 8px;
-  grid-column: start-header / end-header;
-  grid-row: ${({ roomId }) => `${roomId}-start / ${roomId}-end`};
-  color: ${(props) => props.theme.color.font.onForeground};
-`;
-
-export const ScheduleGrid: FC<{ children: ReactNode }> = ({ children }) => (
-  <Grid>
-    {getAllLocationOptions().map((loc) => (
-      <Fragment key={loc.id}>
-        <GridBordersOnRow rowId={loc.id} />
-        <LocationRow roomId={loc.id}>
-          <p dangerouslySetInnerHTML={{
-            __html: loc.name
-          }} />
-        </LocationRow>
-      </Fragment>
-    ))}
-    {children}
-  </Grid>
-);
+export const ScheduleGrid: FC<{ children: ReactNode }> = ({ children }) => {
+  const scrollPosition = useHorizontalSrollPosition();
+  return (
+    <Grid>
+      {getAllLocationOptions().map((loc) => (
+        <Fragment key={loc.id}>
+          <GridBordersOnRow rowId={loc.id} />
+          <LocationRow scrollPosition={scrollPosition} loc={loc} />
+        </Fragment>
+      ))}
+      {children}
+    </Grid>
+  );
+};
 
 const GridBordersOnRow: FC<{ rowId: string }> = ({ rowId }) => (
   <>

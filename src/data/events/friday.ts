@@ -126,4 +126,14 @@ export const FRIDAY_EVENTS: Event[] = [
       },
     ],
   },
+  {
+    name: "Pool open",
+    location: LOCATIONS.Pool,
+    periods: [
+      {
+        from: friday(16),
+        to: friday(23),
+      },
+    ],
+  },
 ];

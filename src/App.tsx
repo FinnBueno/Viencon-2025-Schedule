@@ -12,6 +12,8 @@ const getGlobalStyle = (theme: Theme) => css`
     padding: 0;
     background-color: ${theme.color.background};
     color: ${theme.color.font.onBackground};
+    width: fit-content;
+    height: 100%;
   }
 
   * {

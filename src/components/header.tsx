@@ -3,44 +3,89 @@ import {
   getAllTimestampSegments,
   isVisibleTimestamp,
 } from "../scheduling/time-util";
+import { LogoImage } from "./logo";
 
 const DayHeader = styled.h2`
   grid-row: start-timestamp / end-timestamp;
   z-index: 2;
-  margin: 0 0 36px 0;
+  margin: 0;
+
+  position: sticky;
+  top: 0;
+  align-self: start;
 `;
 
 const FridayHeader = styled(DayHeader)`
-  grid-column: FRIDAY-16-0-start / FRIDAY-23-0-end;
+  grid-column: FRIDAY-16-0-start / SATURDAY-11-0-start;
 `;
 
 const SaturdayHeader = styled(DayHeader)`
-  grid-column: SATURDAY-11-0-start / SATURDAY-12-0-end;
+  grid-column: SATURDAY-11-0-start / SUNDAY-11-0-start;
 `;
 
 const SundayHeader = styled(DayHeader)`
-  grid-column: SUNDAY-11-0-start / SUNDAY-12-0-end;
+  grid-column: SUNDAY-11-0-start / SUNDAY-18-0-end;
 `;
+
+const StickyWeekday = styled.span`
+  position: sticky;
+  left: 4px;
+  align-self: start;
+`
 
 const TimestampDisplay = styled.div<{ stamp: string }>`
   grid-column: ${({ stamp }) => `${stamp}-start / ${stamp}-end`};
   grid-row: start-timestamp / end-timestamp;
   font-size: 1.5rem;
-  position: relative;
+  position: sticky;
+  top: 0;
+  align-self: start;
   & > p {
-    position: absolute;
-    left: calc(-50% + 10px);
-    margin: 0;
+    margin: 36px 0 0 calc(-50% + 10px);
     bottom: 0;
   }
+  background-color: ${props => props.theme.color.background};
 `;
+
+const LogoPlaceholder = styled.div`
+  background-color: ${props => props.theme.color.background};
+
+  grid-column: start-header / end-header;
+  grid-row: start-timestamp / end-timestamp;
+  
+  position: sticky;
+  top: 0;
+  align-self: start;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding-left: 8px;
+`
 
 export const TableHeaders = () => {
   return (
     <>
-      <FridayHeader>Friday</FridayHeader>
-      <SaturdayHeader>Saturday</SaturdayHeader>
-      <SundayHeader>Sunday</SundayHeader>
+      <LogoPlaceholder>
+        <LogoImage />
+      </LogoPlaceholder>
+      <FridayHeader>
+        <StickyWeekday>
+          Friday
+        </StickyWeekday>
+      </FridayHeader>
+      <SaturdayHeader>
+        <StickyWeekday>
+          Saturday
+        </StickyWeekday>
+      </SaturdayHeader>
+      <SundayHeader>
+        <StickyWeekday>
+          Sunday
+        </StickyWeekday>
+      </SundayHeader>
       {getAllTimestampSegments().map(({ day, hours, quarters }) => {
         const stamp = `${day}-${hours}-${quarters}`;
         return (

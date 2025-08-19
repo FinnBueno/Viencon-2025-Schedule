@@ -1,7 +1,7 @@
 import { ALL_LOCATIONS } from "../data/locations";
 
 export const getAllLocationOptions = () => {
-  return ALL_LOCATIONS.reduce<{ id: string; name: string }[]>(
+  return ALL_LOCATIONS.reduce<{ id: string; name: string; emoji: string }[]>(
     (total, current) => {
       if (current.subroom) {
         total = [
@@ -11,6 +11,9 @@ export const getAllLocationOptions = () => {
             name: current.name
               ? `<b>${current.name}</b> ${subroom.name}`
               : `<b>${subroom.name}</b>`,
+            emoji: current.emoji
+              ? `${current.emoji} ${subroom.emoji}`
+              : subroom.emoji,
           })),
         ];
       } else {
@@ -19,6 +22,7 @@ export const getAllLocationOptions = () => {
           {
             id: current.id,
             name: `<b>${current.name}</b>`,
+            emoji: current.emoji,
           },
         ];
       }
@@ -26,5 +30,4 @@ export const getAllLocationOptions = () => {
     },
     []
   );
-  //.map((item) => ({ ...item, name: item.name.replace("\n", "<br />") }));
 };

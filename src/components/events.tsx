@@ -3,12 +3,15 @@ import { EVENTS } from "../data/events";
 import styled from "@emotion/styled";
 
 const EventBlock = styled.div<{ from: string; to: string; rowId: string }>`
-  background-color: ${(props) => props.theme.color.eventBlock};
   grid-column: ${(props) => `${props.from}-start / ${props.to}-start`};
   grid-row: ${(props) => `${props.rowId}-start / ${props.rowId}-end`};
+  
   outline: 1px solid;
-  margin-left: 1px;
-  margin-top: 1px;
+  background-color: ${(props) => props.theme.color.eventBlock};
+  border-radius: 8px;
+
+  padding: 8px 12px;
+
   color: ${(props) => props.theme.color.font.onForeground};
 `;
 
