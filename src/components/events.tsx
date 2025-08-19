@@ -28,7 +28,13 @@ export const Events: FC<unknown> = () => (
             to={toStamp}
             rowId={event.location.id}
           >
-            {event.subtext ? `${event.name} (${event.subtext})` : event.name}
+            {event.subtext ? 
+              <>
+                <b>{event.name}</b> ({event.subtext})
+              </> :
+              <b>
+                {event.name}
+              </b>}
           </EventBlock>
         );
       });
