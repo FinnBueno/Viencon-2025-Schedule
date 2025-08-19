@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://FinnBueno.github.io/Viencon-2025-Schedule",
+  "homepage": "https://FinnBueno.github.io/viencon-2025-schedule",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
