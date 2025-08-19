@@ -141,7 +141,7 @@ export const SATURDAY_EVENTS: Event[] = [
     periods: [
       {
         from: saturday(19, 30),
-        to: saturday(21, 30),
+        to: saturday(21, 0),
       },
     ],
   },
@@ -203,6 +203,16 @@ export const SATURDAY_EVENTS: Event[] = [
       {
         from: saturday(14, 30),
         to: saturday(16, 30),
+      },
+    ],
+  },
+  {
+    name: "D&D Oneshot",
+    location: LOCATIONS.HawkArena.subroom.squash,
+    periods: [
+      {
+        from: saturday(12),
+        to: saturday(14),
       },
     ],
   },
