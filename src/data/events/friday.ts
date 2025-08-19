@@ -79,8 +79,8 @@ export const FRIDAY_EVENTS: Event[] = [
     location: LOCATIONS.DuckyDomeStage,
     periods: [
       {
-        from: friday(23, 0),
-        to: friday(23, 45),
+        from: saturday(0, 0),
+        to: saturday(3, 0),
       },
     ],
   },
