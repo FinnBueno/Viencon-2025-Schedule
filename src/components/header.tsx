@@ -3,7 +3,8 @@ import {
   getAllTimestampSegments,
   isVisibleTimestamp,
 } from "../scheduling/time-util";
-import { LogoImage } from "./logo";
+import { LogoImage } from "./atoms/logo";
+import { Settings } from "./settings";
 
 const DayHeader = styled.h2`
   grid-row: start-timestamp / end-timestamp;
@@ -69,6 +70,7 @@ export const TableHeaders = () => {
   return (
     <>
       <LogoPlaceholder>
+        <Settings />
         <LogoImage />
       </LogoPlaceholder>
       <FridayHeader>

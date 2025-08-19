@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import logo from "../assets/viencon_logo.webp";
+import logo from "../../assets/viencon_logo.webp";
 
 const Image = styled.img`
   height: 48px;
