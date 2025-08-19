@@ -14,18 +14,20 @@ const ButtonGroup = styled.div`
 
 export const Settings = () => {
   const [showModal, setShowModal] = useState(false);
-  const { toggle, theme } = useVienconTheme();
+  const { toggle, theme, getTheme } = useVienconTheme();
 
   const ThemeIcon = theme === 'dark' ? FaSun : FaMoon;
+
+  const themeObject = getTheme();
 
   return (
     <>
       <ButtonGroup>
         <Button>
-          <ThemeIcon onClick={toggle} color={darkTheme.color.font.onBackground} size={24} />
+          <ThemeIcon onClick={toggle} color={themeObject.color.font.onBackground} size={24} />
         </Button>
         <Button>
-          <FaInfoCircle color={darkTheme.color.font.onBackground} size={24} onClick={() => setShowModal(true)} />
+          <FaInfoCircle color={themeObject.color.font.onBackground} size={24} onClick={() => setShowModal(true)} />
         </Button>
       </ButtonGroup>
       <Modal hideModal={() => setShowModal(false)} show={showModal}>
