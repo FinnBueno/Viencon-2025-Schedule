@@ -1,6 +1,5 @@
 import styled from "@emotion/styled"
 import { Button } from "./atoms/button"
-import { darkTheme } from "../styles/theme"
 import { FaInfoCircle, FaMoon, FaSun } from "react-icons/fa"
 import { useState } from "react"
 import { Modal } from "./molecules/modal"
