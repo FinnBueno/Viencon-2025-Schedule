@@ -1,31 +1,33 @@
 import type { Location } from "../locations";
 
-export const friday = (hours: number, minutes: number = 0): Timestamp => ({
+export const friday = (hours: number, minutes: Quarter = 0): Timestamp => ({
   day: "FRIDAY",
   hours,
   minutes,
 });
 
-export const saturday = (hours: number, minutes: number = 0): Timestamp => ({
+export const saturday = (hours: number, minutes: Quarter = 0): Timestamp => ({
   day: "SATURDAY",
   hours,
   minutes,
 });
 
-export const sunday = (hours: number, minutes: number = 0): Timestamp => ({
+export const sunday = (hours: number, minutes: Quarter = 0): Timestamp => ({
   day: "SUNDAY",
   hours,
   minutes,
 });
 
-type Days = "FRIDAY" | "SATURDAY" | "SUNDAY";
+export type Days = "FRIDAY" | "SATURDAY" | "SUNDAY";
 
 export const DAYS: Days[] = ["FRIDAY", "SATURDAY", "SUNDAY"];
+
+export type Quarter = 0 | 15 | 30 | 45;
 
 export type Timestamp = {
   day: Days;
   hours: number;
-  minutes: number;
+  minutes: Quarter;
 };
 
 type Timespan = {
