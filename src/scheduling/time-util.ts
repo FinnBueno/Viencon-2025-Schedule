@@ -23,5 +23,5 @@ const toTimestamp = (i: number): [Days, number, Quarter] => {
  * @returns True if it should be visible, false otherwise
  */
 export const isVisibleTimestamp = (hours: number, quarters: Quarter) => {
-  return (hours === 4 && quarters === 0) || hours < 4 || hours >= 11;
+  return (hours === 4 && quarters === 0) || hours < 4 || hours >= 9;
 };
