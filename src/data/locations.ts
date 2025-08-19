@@ -11,17 +11,17 @@ export const LOCATIONS = {
     subroom: {
       roomOne: {
         id: "roomOne",
-        name: "Room 1",
+        name: "\n(Room 1)",
       },
       roomTwo: {
         id: "roomTwo",
-        name: "Room 2",
+        name: "\n(Room 2)",
       },
     },
   },
   DuckyDomeStage: {
     id: "DuckyDomeStage",
-    name: "Ducky Dome Stage",
+    name: "Ducky Dome\nStage",
   },
   GameroomKaraoke: {
     id: "GameroomKaraoke",
@@ -43,7 +43,7 @@ export const LOCATIONS = {
   },
   MainstageField: {
     id: "MainstageField",
-    name: "Field next to Mainstage",
+    name: "Field next to\nMainstage",
   },
   HawkArena: {
     id: "HawkArena",
@@ -51,11 +51,11 @@ export const LOCATIONS = {
     subroom: {
       gym: {
         id: "gym",
-        name: "Gym Hall",
+        name: "\n(Gym Hall)",
       },
       squash: {
         id: "squash",
-        name: "Squash Hall",
+        name: "\n(Squash Hall)",
       },
     },
   },

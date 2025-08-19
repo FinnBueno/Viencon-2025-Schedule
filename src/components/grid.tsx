@@ -9,8 +9,21 @@ import { getAllLocationOptions } from "../scheduling/location-util";
 
 const segmentSpace = "80px";
 
+/**
+ * Generates the column setup for the grid.
+ * The columns are setup to allow easy positioning depending on an events timing.
+ * There are markers at each quarter in time, with each quarter having a start and end marker.
+ * A marker is named <day>-<hours>-<minutes>-start and <day>-<hours>-<quarters>-end.
+ * The start line of a given quarter is equal to the end line of the quarter before it.
+ * The end line of a given quarter is thus also equal to the start line of the quarter after it.
+ * The column width is equal to the variable 'segmentSpace', except if the column is between 4 and 11 AM (exclusive). If they are, their width is set to 0.
+ * The columns are prepended with an extra column for showing the room names, which is marked by marker lines named 'start-header' and 'end-header' and has a width of min-content.
+ * In it's totality, it'll look something like this (with certain times ommitted for readability):
+ * [start-header] min-content [end-header FRIDAY-16-0-start] segmentSpace [FRIDAY-16-0-end FRIDAY-16-15-start] segmentSpace [FRIDAY-16-15-end FRIDAY-4-15-start] 0px [FRIDAY-4-15-end]
+ * @returns The CSS value for 'grid-template-columns' for the schedule grid
+ */
 const getColumnTemplate = () => {
-  let columnTemplate = "[start-header] min-content [end-header ";
+  let columnTemplate = "[start-header] 140px [end-header ";
   const allSegments = getAllTimestampSegments();
   for (const { day, hours, quarters, index } of allSegments) {
     const stamp = `${day}-${hours}-${quarters}`;
@@ -23,6 +36,18 @@ const getColumnTemplate = () => {
   return columnTemplate + " end-of-table]";
 };
 
+/**
+ * Generates the row setup for the grid.
+ * The rows are setup to allow easy positioning depending on an events location.
+ * There are start and end markers defined for each major room, as well as its subrooms.
+ * A marker is named <room id>-start and <room id>-end.
+ * The start line of a room is equal to the start line of its first subroom, and its end line is equal to the end line of its last subroom. Thus, if you'd have room A with subrooms B and C, spanning from A-start to A-end would be equal to spanning from B-start to C-end.
+ * The row column is prepended with an extra row to target the timestamp row at the top.
+ * All width is defined as 'min-content'.
+ * In its totality, it'll look something like this:
+ * [start-timestamp] min-content [end-timestamp a-start b-start] min-content [b-end c-start] min-content [c-end a-end]
+ * @returns The CSS value for 'grid-template-rows' for the schedule grid
+ */
 const getRowTemplate = () => {
   let rowTemplate = "[start-timestamp] min-content [end-timestamp ";
   ALL_LOCATIONS.forEach((location, index) => {
@@ -53,20 +78,24 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: ${getColumnTemplate()};
   grid-template-rows: ${getRowTemplate()};
+  row-gap: 8px;
 `;
 
 const GridBorder = styled.div<{ stamp: string; rowId: string }>`
   border-color: ${(props) => props.theme.color.font.onBackground};
   border-style: solid;
   border-width: 0 0 0 1px;
+  height: calc(100% + 8px);
   grid-column: ${(props) => `${props.stamp}-start / ${props.stamp}-end`};
   grid-row: ${(props) => `${props.rowId}-start / ${props.rowId}-end`};
 `;
 
 const LocationRow = styled.div<{ roomId: string }>`
-  background-color: #f0c1c2;
-  padding: 12px;
-  white-space: nowrap;
+  background-color: rgb(234, 174, 93);
+  border-radius: 0 12px 12px 0;
+  text-align: right;
+  padding: 12px 20px 12px 12px;
+  margin-right: 8px;
   grid-column: start-header / end-header;
   grid-row: ${({ roomId }) => `${roomId}-start / ${roomId}-end`};
   color: ${(props) => props.theme.color.font.onForeground};
@@ -76,15 +105,23 @@ export const ScheduleGrid: FC<{ children: ReactNode }> = ({ children }) => (
   <Grid>
     {getAllLocationOptions().map((loc) => (
       <Fragment key={loc.id}>
-        {getAllTimestampSegments().map(({ day, hours, quarters }) => {
-          const stamp = `${day}-${hours}-${quarters}`;
-          return <GridBorder key={stamp} stamp={stamp} rowId={loc.id} />;
-        })}
+        <GridBordersOnRow rowId={loc.id} />
         <LocationRow roomId={loc.id}>
-          <p>{loc.name}</p>
+          <p dangerouslySetInnerHTML={{
+            __html: loc.name
+          }} />
         </LocationRow>
       </Fragment>
     ))}
     {children}
   </Grid>
 );
+
+const GridBordersOnRow: FC<{ rowId: string }> = ({ rowId }) => (
+  <>
+    {getAllTimestampSegments().map(({ day, hours, quarters }) => {
+      const stamp = `${day}-${hours}-${quarters}`;
+      return <GridBorder key={stamp} stamp={stamp} rowId={rowId} />;
+    })}
+  </>
+)

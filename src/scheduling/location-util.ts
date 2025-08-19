@@ -6,9 +6,11 @@ export const getAllLocationOptions = () => {
       if (current.subroom) {
         total = [
           ...total,
-          ...Object.entries(current.subroom).map(([key, value]) => ({
+          ...Object.entries(current.subroom).map(([key, subroom]) => ({
             id: key,
-            name: `${current.name} (${value.name})`,
+            name: current.name
+              ? `<b>${current.name}</b> ${subroom.name}`
+              : `<b>${subroom.name}</b>`,
           })),
         ];
       } else {
@@ -16,7 +18,7 @@ export const getAllLocationOptions = () => {
           ...total,
           {
             id: current.id,
-            name: current.name,
+            name: `<b>${current.name}</b>`,
           },
         ];
       }
@@ -24,4 +26,5 @@ export const getAllLocationOptions = () => {
     },
     []
   );
+  //.map((item) => ({ ...item, name: item.name.replace("\n", "<br />") }));
 };
