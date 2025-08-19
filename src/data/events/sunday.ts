@@ -104,16 +104,6 @@ export const SUNDAY_EVENTS: Event[] = [
       },
     ],
   },
-  {
-    name: "Aqua Para Workshop",
-    location: LOCATIONS.Pool,
-    periods: [
-      {
-        from: sunday(12, 0),
-        to: sunday(12, 45),
-      },
-    ],
-  },
   // all day events
   {
     name: "Artist Alley / Matsuri & Ducky Yard Sale",
@@ -153,6 +143,16 @@ export const SUNDAY_EVENTS: Event[] = [
       {
         from: sunday(12),
         to: sunday(23),
+      },
+    ],
+  },
+  {
+    name: "Aqua Para Workshop",
+    location: LOCATIONS.Pool,
+    periods: [
+      {
+        from: sunday(12, 0),
+        to: sunday(12, 45),
       },
     ],
   },
