@@ -17,15 +17,15 @@ const DayHeader = styled.h2`
 `;
 
 const FridayHeader = styled(DayHeader)`
-  grid-column: FRIDAY-16-0-start / SATURDAY-11-0-start;
+  grid-column: FRIDAY-16-0-start / SATURDAY-9-0-start;
 `;
 
 const SaturdayHeader = styled(DayHeader)`
-  grid-column: SATURDAY-11-0-start / SUNDAY-11-0-start;
+  grid-column: SATURDAY-9-0-start / SUNDAY-9-0-start;
 `;
 
 const SundayHeader = styled(DayHeader)`
-  grid-column: SUNDAY-11-0-start / SUNDAY-18-0-end;
+  grid-column: SUNDAY-9-0-start / SUNDAY-18-0-end;
 `;
 
 const StickyWeekday = styled.span`
