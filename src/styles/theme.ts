@@ -6,8 +6,9 @@ export const darkTheme: Theme = {
     location: "rgb(234, 174, 93)",
     background: "#314149",
     font: {
-      onBackground: "#ffffff",
-      onForeground: "#000000",
+      onBackground: "#fff",
+      onForeground: "#000",
+      link: "rgb(80, 160, 238)",
     },
   },
 };
@@ -20,6 +21,7 @@ export const lightTheme: Theme = {
     font: {
       onBackground: "#000",
       onForeground: "#fff",
+      link: "rgb(0, 0, 238)",
     },
   },
 };

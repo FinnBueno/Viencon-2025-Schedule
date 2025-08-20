@@ -9,6 +9,7 @@ declare module "@emotion/react" {
       font: {
         onBackground: string;
         onForeground: string;
+        link: string;
       };
     };
   }
